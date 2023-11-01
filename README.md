@@ -13,29 +13,32 @@ This solution uses the following:
 * **S3 bucket** - destination for uploading CSV file(s) for each customer, each time they need to meter usage.
 * **Lambda function** (lambda / marketplace-csv-to-dynamodb / lambda_function.py) - transforms CSV to JSON, and put as a new item in the AWSMarketplaceMeteringRecords DynamoDB table.
 
-The intent behind this solution is to allow:
-* Less technical partner Alliance Leads to submit metering updates to Marketplace without crafting custom JSON.
-* Simplify authorization and authentication with a basic S3 upload process.
+What's the purpose of this solution?:
+* A simpler CSV-based approach for inserting manual metering records into DynamoDB that doesn't require customizing JSON.
 
 ## How it works
 
-Rather than having partners manually update a DynamoDB table manually with JSON, I've created a simpler CSV-based solution that works as follows:
+Rather than having partners manually update a DynamoDB table manually with JSON, this solution works as a simple CSV-based mechanism.
 
-1. Partner fills out a template CSV file for the specific customer and product dimensions that need to be metered:
+!(marketplace-csv-metering-solution.png)
+
+The partner prepares a CSV file based on the customerIdentifier.csv template for the specific customer and product dimensions that need to be metered:
 
 **customerIdentifier.csv** - partner replaces the **customerIdentifier** with the exact identifier in Marketplace.
 
 **dimension_1_id,1** - for each row in the CSV, partner replaces **dimension_1_id** with the exact product dimension name and **1** with the value.
 
-2. Partner is logs in to their AWS account using the IAM user with upload access to the target S3 bucket.
+Partner is logs in to their AWS account using the IAM user with upload access to the target S3 bucket.
 
-3. Partner uploads CSV(s) to the S3 bucket.
+1. Partner uploads CSV(s) to the S3 bucket.
 
-4. A S3 Event Notification invokes the Lambda function based on the PutObject event.
+2. A S3 Event Notification invokes the Lambda function based on the PutObject event.
 
-5. The Lambda function reads in the CSV file, transforms it to the JSON format required for DynamoDB item entry, then creates the item in the AWSMarketplaceMeteringRecords table.
+3. The Lambda function reads in the CSV file, transforms it to the JSON.
 
-6. Within an hour, the serverless solution posts the updated items to the Marketplace API.
+4. The Lambda function then creates a DynamoDB item in the AWSMarketplaceMeteringRecords table.
+
+Within an hour, the serverless solution posts the updated items to the Marketplace API.
 
 ### Sample CSV
 
