@@ -6,6 +6,10 @@ In order to meter for usage using the [AWS Marketplace Serverless SaaS Partner S
 
 **Note**: this solution is designed to work with the AWS Marketplace Serverless SaaS Partner Solution. The partner must already have this deployed. 
 
+This solution focuses on the insertion of manual metering records in the AWSMarketPlaceMeteringRecords DynamoDB table created by the Serverless SaaS Integration:
+
+![Serverless-MP.png](Serverless-MP.png)
+
 This solution uses the following:
 
 * **CSV file** (s3 / customerIdentifier.csv) - used to capture the dimensions, metered value and customer identifier needed to send to Marketplace.
@@ -20,7 +24,7 @@ What's the purpose of this solution?:
 
 Rather than having partners manually update a DynamoDB table manually with JSON, this solution works as a simple CSV-based mechanism.
 
-!(marketplace-csv-metering-solution.png)
+![marketplace-csv-metering-solution.png](marketplace-csv-metering-solution.png)
 
 The partner prepares a CSV file based on the customerIdentifier.csv template for the specific customer and product dimensions that need to be metered:
 
