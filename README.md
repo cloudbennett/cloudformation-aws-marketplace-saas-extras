@@ -1,12 +1,12 @@
 # Alternate Mechanism - CSV Metering Records Upload
 
-In order to meter for usage using the [AWS Marketplace Serverless SaaS Partner Solution](https://aws.amazon.com/solutions/implementations/aws-marketplace-saas/), the documentation describes updating the [**AWSMarketplaceMeteringRecords** DynamoDB table with a JSON record](https://aws-ia.github.io/cloudformation-aws-marketplace-saas/#_meter_for_usage) for the customer identifier and each dimension + value to be metered.
+In order to meter for usage using the [AWS Marketplace Serverless SaaS Quick Start](https://aws.amazon.com/solutions/implementations/aws-marketplace-saas/), the documentation describes updating the [**AWSMarketplaceMeteringRecords** DynamoDB table with a JSON record](https://aws-ia.github.io/cloudformation-aws-marketplace-saas/#_meter_for_usage) for the customer identifier and each dimension + value to be metered.
 
 ## Solution
 
-**Note**: this solution is designed to work with the AWS Marketplace Serverless SaaS Partner Solution. The partner must already have this deployed. 
+**Note**: this solution is designed to work with the [AWS Marketplace Serverless SaaS Quick Start](https://aws.amazon.com/solutions/implementations/aws-marketplace-saas/). The partner must already have this deployed. 
 
-This solution focuses on the insertion of manual metering records in the AWSMarketPlaceMeteringRecords DynamoDB table created by the Serverless SaaS Integration:
+This solution focuses on the insertion of manual metering records in the AWSMarketPlaceMeteringRecords DynamoDB table created by the CloudFormation Stack:
 
 ![Serverless-MP.png](Serverless-MP.png)
 
@@ -26,11 +26,11 @@ Rather than having partners manually update a DynamoDB table manually with JSON,
 
 ![marketplace-csv-metering-solution.png](marketplace-csv-metering-solution.png)
 
-The partner prepares a CSV file based on the customerIdentifier.csv template for the specific customer and product dimensions that need to be metered:
+The partner prepares a CSV file based on the [customerIdentifier.csv](s3/customerIdentifier.csv) template for the specific customer and product dimensions that need to be metered:
 
-**customerIdentifier.csv** - partner replaces the **customerIdentifier** with the exact identifier in Marketplace.
+* **customerIdentifier.csv** - partner replaces the **customerIdentifier** with the exact identifier in Marketplace.
 
-**dimension_1_id,1** - for each row in the CSV, partner replaces **dimension_1_id** with the exact product dimension name and **1** with the value.
+* **dimension_1_id,1** - for each row in the CSV, partner replaces **dimension_1_id** with the exact product dimension name and **1** with the value.
 
 Partner is logs in to their AWS account using the IAM user with upload access to the target S3 bucket.
 
