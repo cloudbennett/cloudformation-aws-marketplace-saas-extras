@@ -111,7 +111,7 @@ In order to authorize Lambda to read the CSV file from S3 and put an item in the
             {
                 "Effect": "Allow",
                 "Action": "logs:CreateLogGroup",
-                "Resource": "arn:aws:logs:us-east-1:868121969675:*"
+                "Resource": "arn:aws:logs:us-east-1:############:*"
             },
             {
                 "Effect": "Allow",
@@ -120,7 +120,7 @@ In order to authorize Lambda to read the CSV file from S3 and put an item in the
                     "logs:PutLogEvents"
                 ],
                 "Resource": [
-                    "arn:aws:logs:us-east-1:868121969675:log-group:/aws/lambda/MarketplaceCSVtoDynamoDB:*"
+                    "arn:aws:logs:us-east-1:############:log-group:/aws/lambda/marketplace-csv-to-dynamodb:*"
                 ]
             },
             {
