@@ -8,6 +8,9 @@ This optional add-on is designed to work with the AWS Marketplace Serverless Saa
 - Sellers who need a manual, simple method for reporting metered usage records without involving developers to build a custom integration between their system and AWS.
 
 ## How it works
+
+![architecture.png](architecture.png)
+
 - Seller gathers usage data from their SaaS application to determine any subscription or pay-as-you-go consumption (beyond contract) metering that needs to be reported to AWS Marketplace to properly bill customers.
 - Seller obtains customer identifiers from their Subscribers DynamoDB table.
 - Seller creates a custom CSV file for each unique customer identifier, listing each product usage dimension and metering amount.
