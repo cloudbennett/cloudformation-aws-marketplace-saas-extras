@@ -2,18 +2,17 @@
 This optional add-on is designed to work with the [AWS Marketplace Serverless SaaS Integration](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration) to give sellers a manual, simple, CSV-based method for publishing custom metering usage to AWS Marketplace. **Do not** use this unless you have a Limited or Public listing for a SaaS product on AWS Marketplace using the Serverless SaaS Integration.
 
 ## Intended for
-- Sellers with either SaaS pricing option known as "subscription" (usage-based) or "pay-as-you-go" (contract with consumption). It does *not* work with contract-based pricing.
+- Sellers with a SaaS product, with pricing option "subscription" (usage-based) or "pay-as-you-go" (contract with consumption). This does not work with contract-based pricing.
 - Manual reporting of metered usage records to AWS Marketplace.
 - Sellers with low volume of Marketplace transactions.
 - Sellers who need a simple method for reporting metered usage records to AWS Marketplace without involving developers to build a custom integration between their system and AWS.
 
 ## How it works
-- Seller gathers usage data from their SaaS application to determine any subscription or pay-as-you-go consumption (beyond contract) metering that needs to be reported to AWS Marketplace to properly bill customers.
-- Seller obtains customer identifiers from their Subscribers DynamoDB table.
-- Seller creates a custom CSV file for each unique customer identifier, listing each product usage dimension and metering amount.
-- Seller uploads each CSV to a S3 bucket. The bucket triggers a Lambda function which transforms and writes the data to the Metering Records DynamoDB table.
-- Every hour, any pending records in the Metering Records table are published to the AWS Marketplace BatchMeterUsage API.
-- One day later, the CSV file is deleted from the S3 bucket.
+1. **Manual upload**: Seller (alliance lead) uploads a custom CSV with usage data from their SaaS application, for a specific customer ID gathered from the Subscribers DynamoDB table, to report metered usage for all dimensions and values listed in the CSV to AWS Marketplace.
+2. **Event Notification**: A S3 Event Notification triggers a Lambda function automatically once the file is uploaded.
+3. **Transform CSV to JSON**: The Lambda function reads the CSV file from the S3 bucket and processes each row of dimensions and values, plus the current timestamp, to created JSON inserting into the Metering Records DynamoDB table.
+4. **Insert Item**: The Lambda function inserts the JSON containing the customer ID, all metered dimensions and values, and timestamp to DynamoDB.
+5. **Hourly records publish**: Each hour, the Serverless SaaS Integration automatically processes any new records in DynamoDB and publishes them to the the Marketplace API, reflecting state and status back to DynamoDB.
 
 ![architecture.png](architecture.png)
 
