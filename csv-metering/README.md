@@ -8,9 +8,6 @@ This optional add-on is designed to work with the AWS Marketplace Serverless Saa
 - Sellers who need a manual, simple method for reporting metered usage records without involving developers to build a custom integration between their system and AWS.
 
 ## How it works
-
-![architecture.png](architecture.png)
-
 - Seller gathers usage data from their SaaS application to determine any subscription or pay-as-you-go consumption (beyond contract) metering that needs to be reported to AWS Marketplace to properly bill customers.
 - Seller obtains customer identifiers from their Subscribers DynamoDB table.
 - Seller creates a custom CSV file for each unique customer identifier, listing each product usage dimension and metering amount.
@@ -18,7 +15,18 @@ This optional add-on is designed to work with the AWS Marketplace Serverless Saa
 - Every hour, any pending records in the Metering Records table are published to the AWS Marketplace BatchMeterUsage API.
 - One day later, the CSV file is deleted from the S3 bucket.
 
+![architecture.png](architecture.png)
+
 ## Manual CSV Metering
 1. Obtain DynamoDB Metering Records table name
 2. Deploy CFT
 3. S3 Bucket: add Event Notification trigger for Lambda (s3:ObjectCreated:Put)
+4. Create IAM Role for Alliance Lead: RO access to both DynamoDB tables, S3 bucket
+5. Obtain CustomerIdentifier from Subscribers table
+6. Obtain Usage Dimensions from Marketplace Management Portal
+7. Create CSV file: put CustomerIdentifer as name of file (i.e., QEFN33TJED.csv where CustomerIdentifier = QEFN33TJED)
+8. In Excel or Text Editor, insert rows for each Usage Dimension and the value to report to Marketplace
+9. Save the file, login to AWS and upload to S3 bucket
+10. In a few minutes, verify Metereing Records table for new entry
+11. In an hour, the entry will update and publish to Marketplace
+12. In a day, the CSV file will automatically delete from the S3 bucket
