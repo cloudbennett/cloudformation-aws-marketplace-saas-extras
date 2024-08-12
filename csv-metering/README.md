@@ -24,10 +24,10 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
 3. After the Stack is created successfully, navigate to the **Resources** tab and open the link to **S3Bucket**.
 4. Under **Properties**, navigate to **Event notifications** and click **Create event notification**.
 5. Create an event notification with the following:
-  5.1 Event name: **S3EventNotication**.
-  5.2 Event types: **Put** / s3:ObjectCreated:Put (only).
-  5.3 At the bottom, choose the Lambda function created by the Stack: **marketplace-csv-metering-<UI>**.
-  5.4 Click **Save changes**.
+  - Event name: **S3EventNotication**.
+  - Event types: **Put** / s3:ObjectCreated:Put (only).
+  - At the bottom, choose the Lambda function created by the Stack: **marketplace-csv-metering-<UI>**.
+  - Click **Save changes**.
 7. use IAM to configure the Role used by your Seller Admin user to have the following permissions:
 8. AmazonDynamoDBReadOnly
 
