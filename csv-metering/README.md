@@ -45,15 +45,22 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-01.png](sc-01.png)
 
-6. Next, navigate to **DynamoDB** in the AWS Management Console. Open the Subscribers table (default is **AWSMarketplaceSubscribers**). Click Explore table items to view all items in the table, which reflect subscribers of your product. Find the **customerIdentifier** that corresponds to a customer that you need to published metered records for.
+6. Next, navigate to **DynamoDB** in the AWS Management Console. Open the Subscribers table (default is **AWSMarketplaceSubscribers**). Click **Explore table items** to view all items in the table, which reflect subscribers of your product. Find the **customerIdentifier** that corresponds to a customer that you need to published metered records for. You will use this to name your CSV.
 
 ![sc-02.png](sc-02.png)
-   
-5. Obtain CustomerIdentifier from Subscribers table
-6. Obtain Usage Dimensions from Marketplace Management Portal
-7. Create CSV file: put CustomerIdentifer as name of file (i.e., QEFN33TJED.csv where CustomerIdentifier = QEFN33TJED)
-8. In Excel or Text Editor, insert rows for each Usage Dimension and the value to report to Marketplace
-9. Save the file, login to AWS and upload to S3 bucket
-10. In a few minutes, verify Metereing Records table for new entry
-11. In an hour, the entry will update and publish to Marketplace
-12. In a day, the CSV file will automatically delete from the S3 bucket
+
+7. Using **customerIdentifier.csv** as a template, create a new CSV file using a text editor or Microsoft Excel. Save the file locally with the < customerIdentifier>.csv as the file name.
+
+![sc-03.png](sc-03.png)
+
+9. In the CSV file, fill-in the **usage_dimension** you obtained from step 5 (above) and the corresponding **value**, for the specific customerIdentifier. You can add multiple dimensions to one CSV, but you can only use one CSV per customerIdentifier.
+
+![sc-04.png](sc-04.png)
+
+10. Next, navigate to the S3 bucket in AWS Management Console, named **marketplace-csv-metering-s3bucket-<UID>**. Upload the CSV to the bucket by clicking **Upload** and selecting the file. This will now automatically read the CSV file and write it to the DynamoDB table before publishing to AWS Marketplace.
+
+11. Next, navigate back to the **DynamoDB** console and open the Metering Records table (default is **AWSMarketplaceMeteringRecord**). Click Explore table items and you will see an item for the customerIdentifier you just uploaded. Click open the item and view the details to validate the it looks correct.
+
+12. Within an hour, the Serverless SaaS Integration will automatically update AWS Marketplace API with new records in batch. You can check DynamoDB again to validate the status change.
+
+13. Within a day, the CSV file will be automatically deleted from S3 now that records have been reported to AWS Marketplace.
