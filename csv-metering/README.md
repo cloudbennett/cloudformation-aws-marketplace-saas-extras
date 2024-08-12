@@ -12,7 +12,7 @@ This solution is optional, intended for:
 - Sellers who have a Sales Operations user (who doesn't have AWS administrator experience) that need to report metered records to AWS Marketplace on a recurring basis.
 
 ## How it works
-1. **Manual upload**: Seller (alliance lead) uploads a custom CSV with usage data from their SaaS application, for a specific customer ID gathered from the Subscribers DynamoDB table, to report metered usage for all dimensions and values listed in the CSV to AWS Marketplace.
+1. **Manual upload**: Seller Operations user uploads a custom CSV with usage data from their SaaS application, for a specific customer ID gathered from the Subscribers DynamoDB table, to report metered usage for all dimensions and values listed in the CSV to AWS Marketplace.
 2. **Event Notification**: A S3 Event Notification triggers a Lambda function automatically once the file is uploaded.
 3. **Transform CSV to JSON**: The Lambda function reads the CSV file from the S3 bucket and processes each row of dimensions and values, plus the current timestamp, to created JSON inserting into the Metering Records DynamoDB table.
 4. **Insert Item**: The Lambda function inserts the JSON containing the customer ID, all metered dimensions and values, and timestamp to DynamoDB.
