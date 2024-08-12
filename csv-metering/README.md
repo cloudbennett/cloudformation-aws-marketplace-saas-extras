@@ -7,9 +7,9 @@ This optional add-on works with the [AWS Marketplace Serverless SaaS Integration
 ## Intended for
 This solution is optional, intended for:
 - Manual reporting of [metered usage records](https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html) to AWS Marketplace.
-- Sellers with low volume of Marketplace transactions.
+- Sellers with a low volume of Marketplace transactions.
 - Sellers who need a simple method for reporting metered usage records to AWS Marketplace without involving developers to build a custom integration between their system and AWS.
-- Sellers who have a less-technical Seller Admin who need to report metered records to AWS Marketplace on a recurring basis.
+- Sellers who have a Seller Admin (who don't have AWS administrator experience) that need to report metered records to AWS Marketplace on a recurring basis.
 
 ## How it works
 1. **Manual upload**: Seller (alliance lead) uploads a custom CSV with usage data from their SaaS application, for a specific customer ID gathered from the Subscribers DynamoDB table, to report metered usage for all dimensions and values listed in the CSV to AWS Marketplace.
