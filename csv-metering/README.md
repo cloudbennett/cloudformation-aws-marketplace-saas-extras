@@ -1,7 +1,7 @@
 # AWS Marketplace CSV-based Metering Solution
 This optional add-on works with the [AWS Marketplace Serverless SaaS Integration](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration) to give sellers a manual, simple, CSV-based method for publishing custom metering usage to AWS Marketplace. **Do not** use this unless you:
 1. Have a Limited or Public listing for a SaaS product on AWS Marketplace.
-2. Your listing uses "subscription" (usage-based) or "pay-as-you-go" (contract with consumption) [pricing models](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-pricing-models.html). This does not work with contract-based pricing or other [product deliver methods](https://docs.aws.amazon.com/marketplace/latest/userguide/product-preparation.html).
+2. Your listing uses "subscription" (usage-based) or "pay-as-you-go" (contract with consumption) [pricing models](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-pricing-models.html). This does not work with contract-based pricing or other [product delivery methods](https://docs.aws.amazon.com/marketplace/latest/userguide/product-preparation.html).
 3. You have deployed the Serverless SaaS Integration.
 
 ## Intended for
