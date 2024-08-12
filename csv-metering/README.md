@@ -11,6 +11,8 @@ This solution is optional, intended for:
 - Sellers who need a simple method for reporting metered usage records to AWS Marketplace without involving developers to build a custom integration between their system and AWS.
 - Sellers who have a Sales Operations user (who doesn't have AWS administrator experience) that need to report metered records to AWS Marketplace on a recurring basis.
 
+Sellers with high transaction volume of their Marketplace listing are encouraged to automate the metered records fully, by publishing customer usage data directly to DynamoDB from your backend system.
+
 ## How it works
 1. **Manual upload**: Seller Operations user uploads a custom CSV with usage data from their SaaS application, for a specific customer ID gathered from the Subscribers DynamoDB table, to report metered usage for all dimensions and values listed in the CSV to AWS Marketplace.
 2. **Event Notification**: A S3 Event Notification triggers a Lambda function automatically once the file is uploaded.
