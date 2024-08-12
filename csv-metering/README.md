@@ -64,10 +64,10 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-06.png](sc-06.png)
 
-12. Next, navigate back to the **DynamoDB** console and open the Metering Records table (default is **AWSMarketplaceMeteringRecord**). Click **Explore table items** and you will see an item for the **customerIdentifier** you just uploaded. Click open the item and view the details to validate it looks correct.
+12. Next, navigate back to the **DynamoDB** console and open the Metering Records table (default is **AWSMarketplaceMeteringRecord**). Click **Explore table items** and you will see an item for the **customerIdentifier** you just uploaded. Click open the item and view the details to validate it looks correct. `metering_pending` will be set to `true`, meaning it hasn't yet been reported to AWS Marketplace.
 
 ![sc-07.png](sc-07.png)
 
-13. Within an hour, the Serverless SaaS Integration will automatically update AWS Marketplace API with new records in batch. You can check DynamoDB again to validate the status change.
+13. Within an hour, the Serverless SaaS Integration will automatically update AWS Marketplace API with new records in batch. You can check DynamoDB again to validate the status change. `metering_pending` will be set to `false`.
 
 14. Within a day, the CSV file will be automatically deleted from S3 now that records have been reported to AWS Marketplace.
