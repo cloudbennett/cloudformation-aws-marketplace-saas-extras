@@ -32,7 +32,7 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
     3. At the bottom, choose the Lambda function created by the Stack: **marketplace-csv-metering-<UID>**.
     4. Click **Save changes**.
 7. Using IAM, modify the Role used by your Sales Operations user, attaching the following additional permissions. These are the minimum permissions needed to read the DynamoDB tables and upload to the S3 bucket. Replace the values in `<brackets>` with actual values:
-8. 
+
 ```
 {
     "Version": "2012-10-17",
