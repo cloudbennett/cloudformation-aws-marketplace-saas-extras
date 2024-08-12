@@ -9,7 +9,7 @@ This solution is optional, intended for:
 - Manual reporting of [metered usage records](https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html) to AWS Marketplace.
 - Sellers with a low volume of Marketplace transactions.
 - Sellers who need a simple method for reporting metered usage records to AWS Marketplace without involving developers to build a custom integration between their system and AWS.
-- Sellers who have a Seller Admin (who don't have AWS administrator experience) that need to report metered records to AWS Marketplace on a recurring basis.
+- Sellers who have a Sales Operations user (who doesn't have AWS administrator experience) that need to report metered records to AWS Marketplace on a recurring basis.
 
 ## How it works
 1. **Manual upload**: Seller (alliance lead) uploads a custom CSV with usage data from their SaaS application, for a specific customer ID gathered from the Subscribers DynamoDB table, to report metered usage for all dimensions and values listed in the CSV to AWS Marketplace.
@@ -82,7 +82,7 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
 }
 ```
 
-The CSV Metering integration is now prepared and you can now provide steps to your Seller Admin for how to login to AWS, access DynamoDB and S3, and upload CSV files using the following section.
+The CSV Metering integration is now prepared and you can now provide steps (below) to your Sales Operations user for how to login to AWS, access DynamoDB and S3, and upload CSV files using the following section.
 
 ## How to create and upload CSV metering records - Seller Operations
 To publish metering records to AWS Marketplace for customer usage from your SaaS application, you will use the steps below to create and upload a CSV file for each customer. This process is manual and is recommended only for low Marketplace transaction volume.
