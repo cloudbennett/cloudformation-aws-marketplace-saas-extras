@@ -21,7 +21,7 @@ This solution is optional, intended for:
 ![architecture.png](architecture.png)
 
 ## How to deploy the solution - AWS Administrator
-To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access you AWS seller account as an administrator. Then follow these steps:
+To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access the AWS seller account as an administrator. Then follow these steps:
 1. Obtain the Metering Records table name deployed by the [AWS Marketplace Serverless SaaS Integration](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration) to your account (default is **AWSMarketplaceMeteringRecord**).
 2. Using CloudFormation, create a new Stack using the **marketplace-csv-metering.yaml** template in this repo. Input the Subscriber table name into the **DynamoDBMeteringTableName**.
 3. After the Stack is created successfully, navigate to the **Resources** tab and open the link to **S3Bucket**.
