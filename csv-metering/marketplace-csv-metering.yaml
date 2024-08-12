@@ -128,42 +128,6 @@ Resources:
                   'statusCode': 200,
                   'body': json.dumps(dynamodb_item)
               }
-  IAMRoleSellerOperations:
-    Type: AWS::IAM::Role
-    Properties:
-      Policies:
-        - PolicyName: MarketplaceSellerOperations
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - 'dynamodb:List*'
-                  - 'dynamodb:DescribeReservedCapacity'
-                  - 'dynamodb:DescribeLimits'
-                  - 'dynamodb:DescribeTimeToLive'
-                Resource:
-                  - '*'
-              - Effect: Allow
-                Action:
-                  - 'dynamodb:BatchGet*'
-                  - 'dynamodb:DescribeStream'
-                  - 'dynamodb:DescribeTable'
-                  - 'dynamodb:Get*'
-                  - 'dynamodb:Query'
-                  - 'dynamodb:Scan'
-                Resource:
-                  - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DynamoDBSubscribersTableName}'
-                  - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DynamoDBMeteringTableName}'
-              - Effect: Allow
-                Action:
-                  - 's3:Get*'
-                  - 's3:List*'
-                  - 's3:Describe*'
-                  - 's3:PutObject'
-                Resource:
-                  - !GetAtt S3Bucket.Arn
-                  - !Sub '${S3Bucket.Arn}/*'
 Outputs:
   BucketName:
     Description: Name of the S3 bucket
