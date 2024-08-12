@@ -31,13 +31,59 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
     2. Event types: **Put** / s3:ObjectCreated:Put (only).
     3. At the bottom, choose the Lambda function created by the Stack: **marketplace-csv-metering-<UID>**.
     4. Click **Save changes**.
-7. Using IAM, modify the Role used by your Seller Admin, attaching the following additional permissions:
-    1. [Read access](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_dynamodb_specific-table.html) to the two specific DynamoDB tables deployed by the Serverless SaaS Integration (defaults are **AWSMarketplaceSubscribers** and **AWSMarketplaceMeteringRecord**). Or use the**AmazonDynamoDBReadOnlyAccess** AWS managed policy.
-    2. Read and write access to the S3 bucket created by the **marketplace-csv-metering** Stack. Or use the **AmazonS3FullAccess** AWS managed policy.
+7. Using IAM, modify the Role used by your Sales Operations user, attaching the following additional permissions. These are the minimum permissions needed to read the DynamoDB tables and upload to the S3 bucket. Replace the values in `<brackets>` with actual values:
+    ```
+   {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*",
+                "s3:Describe*",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::marketplace-csv-metering-s3bucket-<UID>",
+                "arn:aws:s3:::marketplace-csv-metering-s3bucket-<UID>/*"
+            ]
+        },
+        {
+            "Sid": "Statement2",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:List*",
+                "dynamodb:DescribeReservedCapacity",
+                "dynamodb:DescribeLimits",
+                "dynamodb:DescribeTimeToLive"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "Statement3",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:BatchGet*",
+                "dynamodb:DescribeStream",
+                "dynamodb:DescribeTable",
+                "dynamodb:Get*",
+                "dynamodb:Query",
+                "dynamodb:Scan"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:*:*:table/<AWSMarketplaceSubscribers>",
+                "arn:aws:dynamodb:*:*:table/<AWSMarketplaceMeteringRecords>"
+            ]
+        }
+    ]
+}
+```
 
 The CSV Metering integration is now prepared and you can now provide steps to your Seller Admin for how to login to AWS, access DynamoDB and S3, and upload CSV files using the following section.
 
-## How to create and upload CSV metering records - Seller Admin
+## How to create and upload CSV metering records - Seller Operations
 To publish metering records to AWS Marketplace for customer usage from your SaaS application, you will use the steps below to create and upload a CSV file for each customer. This process is manual and is recommended only for low Marketplace transaction volume.
 
 1. Login to your AWS seller account, used to manage your AWS Marketplace Management Portal (MMP) product listings.
