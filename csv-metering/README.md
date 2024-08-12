@@ -68,6 +68,8 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-07.png](sc-07.png)
 
-13. Within an hour, the Serverless SaaS Integration will automatically update AWS Marketplace API with new records in batch. You can check DynamoDB again to validate the status change. `metering_pending` will be set to `false`.
+13. Within an hour, the Serverless SaaS Integration will automatically update AWS Marketplace API with new records in batch. You can check DynamoDB again to validate the status change. `metering_failed` will be set to `false` and you will see the update status in `metering_response`.
 
-14. Within a day, the CSV file will be automatically deleted from S3 now that records have been reported to AWS Marketplace.
+![sc-08.png](sc-08.png)
+
+15. Within a day, the CSV file will be automatically deleted from S3 now that records have been reported to AWS Marketplace.
