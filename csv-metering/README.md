@@ -42,6 +42,9 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 3. Navigate to your product listing under Products > SaaS.
 4. Open the details of your Subscription or Pay-as-you-go product listing and navigate to **Pricing configuration**.
 5. Under the **Usage fees**, note the **API identifier** of the usage dimensions configured for the product. These will be the available dimensions you use for publishing SaaS usage data to AWS Marketplace as metered records.
+
+![sc-01.png](sc-01.png)
+
 2. Deploy marketplace-csv
 3. S3 Bucket: add Event Notification trigger for Lambda (s3:ObjectCreated:Put)
 4. Create IAM Role for Alliance Lead: RO access to both DynamoDB tables, S3 bucket
