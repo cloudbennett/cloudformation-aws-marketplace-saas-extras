@@ -1,8 +1,11 @@
 # AWS Marketplace CSV-based Metering Solution
-This optional add-on works with the [AWS Marketplace Serverless SaaS Integration](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration) to give sellers a manual, simple, CSV-based method for publishing custom metering usage to AWS Marketplace. **Do not** use this unless you have a Limited or Public listing for a SaaS product on AWS Marketplace using the Serverless SaaS Integration.
+This optional add-on works with the [AWS Marketplace Serverless SaaS Integration](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration) to give sellers a manual, simple, CSV-based method for publishing custom metering usage to AWS Marketplace. **Do not** use this unless you:
+1. Have a Limited or Public listing for a SaaS product on AWS Marketplace.
+2. Your listing uses "subscription" (usage-based) or "pay-as-you-go" (contract with consumption) [pricing models](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-pricing-models.html). This does not work with contract-based pricing or other [product deliver methods](https://docs.aws.amazon.com/marketplace/latest/userguide/product-preparation.html).
+3. You have deployed the Serverless SaaS Integration.
 
 ## Intended for
-- Sellers with a SaaS product listed with "subscription" (usage-based) or "pay-as-you-go" (contract with consumption) [pricing models](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-pricing-models.html) on AWS Marketplace. This does not work with contract-based pricing or other [product deliver methods](https://docs.aws.amazon.com/marketplace/latest/userguide/product-preparation.html).
+This solution is optional, intended for:
 - Manual reporting of [metered usage records](https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html) to AWS Marketplace.
 - Sellers with low volume of Marketplace transactions.
 - Sellers who need a simple method for reporting metered usage records to AWS Marketplace without involving developers to build a custom integration between their system and AWS.
