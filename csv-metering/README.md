@@ -31,7 +31,7 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
     2. Event types: **Put** / s3:ObjectCreated:Put (only).
     3. At the bottom, choose the Lambda function created by the Stack: **marketplace-csv-metering-<UID>**.
     4. Click **Save changes**.
-7. Using IAM, modify the Role used by your Seller Admin to attach the following additional permissions:
+7. Using IAM, modify the Role used by your Seller Admin, attaching the following additional permissions:
     1. [Read access](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_dynamodb_specific-table.html) to the two specific DynamoDB tables deployed by the Serverless SaaS Integration (defaults are **AWSMarketplaceSubscribers** and **AWSMarketplaceMeteringRecord**). Or use the**AmazonDynamoDBReadOnlyAccess** AWS managed policy.
     2. Read and write access to the S3 bucket created by the **marketplace-csv-metering** Stack. Or use the **AmazonS3FullAccess** AWS managed policy.
 
