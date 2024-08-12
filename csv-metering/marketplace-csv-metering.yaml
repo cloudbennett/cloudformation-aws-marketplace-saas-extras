@@ -1,6 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: To be used with the AWS Marketplace SaaS integration - https://github.com/aws-samples/aws-marketplace-serverless-saas-integration. Creates an Amazon S3 Bucket, AWS Lambda function and IAM Role to allow manual metering record upload via CSV file.
 Parameters:
+  DynamoDBSubscribersTableName:
+    Type: String
+    Description: Input the name of the DynamoDB table used for subscriber management (default - AWSMarketplaceSubscribers)
+    AllowedPattern: '.+'
   DynamoDBMeteringTableName:
     Type: String
     Description: Input the name of the DynamoDB table used for metering records (default - AWSMarketplaceMeteringRecords)
@@ -47,7 +51,6 @@ Resources:
                   - 's3:GetObject*'
                 Resource:
                   - !Sub 'arn:aws:s3:::${S3Bucket}/*'
-
   LambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
@@ -125,6 +128,43 @@ Resources:
                   'statusCode': 200,
                   'body': json.dumps(dynamodb_item)
               }
+  IAMPolicySellerOperations:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: MarketplaceSellerOperations
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'dynamodb:List*'
+              - 'dynamodb:DescribeReservedCapacity'
+              - 'dynamodb:DescribeLimits'
+              - 'dynamodb:DescribeTimeToLive'
+            Resource:
+              - '*'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'dynamodb:BatchGet*'
+              - 'dynamodb:DescribeStream'
+              - 'dynamodb:DescribeTable'
+              - 'dynamodb:Get*'
+              - 'dynamodb:Query'
+              - 'dynamodb:Scan'
+            Resource:
+              - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DynamoDBSubscribersTableName}'
+              - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DynamoDBMeteringTableName}'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 's3:Get*'
+              - 's3:List*'
+              - 's3:Describe*'
+              - 's3:PutObject'
+            Resource:
+              - !GetAtt S3Bucket.Arn
+              - !Sub '${S3Bucket.Arn}/*'
 Outputs:
   BucketName:
     Description: Name of the S3 bucket
