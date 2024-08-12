@@ -1,10 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: To be used with the AWS Marketplace SaaS integration - https://github.com/aws-samples/aws-marketplace-serverless-saas-integration. Creates an Amazon S3 Bucket, AWS Lambda function and IAM Role to allow manual metering record upload via CSV file.
 Parameters:
-  DynamoDBSubscribersTableName:
-    Type: String
-    Description: Input the name of the DynamoDB table used for subscriber management (default - AWSMarketplaceSubscribers)
-    AllowedPattern: '.+'
   DynamoDBMeteringTableName:
     Type: String
     Description: Input the name of the DynamoDB table used for metering records (default - AWSMarketplaceMeteringRecords)
