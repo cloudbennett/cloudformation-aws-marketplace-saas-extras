@@ -45,9 +45,10 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-01.png](sc-01.png)
 
-2. Deploy marketplace-csv
-3. S3 Bucket: add Event Notification trigger for Lambda (s3:ObjectCreated:Put)
-4. Create IAM Role for Alliance Lead: RO access to both DynamoDB tables, S3 bucket
+6. Next, navigate to **DynamoDB** in the AWS Management Console. Open the Subscribers table (default is **AWSMarketplaceSubscribers**). Click Explore table items to view all items in the table, which reflect subscribers of your product. Find the **customerIdentifier** that corresponds to a customer that you need to published metered records for.
+
+![sc-02.png](sc-02.png)
+   
 5. Obtain CustomerIdentifier from Subscribers table
 6. Obtain Usage Dimensions from Marketplace Management Portal
 7. Create CSV file: put CustomerIdentifer as name of file (i.e., QEFN33TJED.csv where CustomerIdentifier = QEFN33TJED)
