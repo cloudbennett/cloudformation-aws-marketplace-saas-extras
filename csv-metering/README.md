@@ -28,7 +28,7 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
 2. Using CloudFormation, create a new Stack using the **marketplace-csv-metering.yaml** template in this repo. Input the Subscriber table name into the **DynamoDBMeteringTableName**.
 3. After the Stack is created successfully, navigate to the **Resources** tab and open the link to **S3Bucket**.
 4. Under **Properties**, navigate to **Event notifications** and click **Create event notification**.
-5. Create an event notification with the following:
+5. Create an event notification with the following configuration:
     1. Event name: **S3EventNotication**.
     2. Suffix: **.csv**
     3. Event types: **Put** / s3:ObjectCreated:Put (only).
