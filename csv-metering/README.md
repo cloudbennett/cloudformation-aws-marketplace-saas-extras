@@ -84,7 +84,7 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
 }
 ```
 
-The CSV Metering integration is now prepared and you can now provide steps (below) to your Sales Operations user for how to login to AWS, access DynamoDB and S3, and upload CSV files using the following section.
+The CSV Metering integration is now prepared and you can now provide steps (below) to your Sales Operations user for how to login to AWS, access DynamoDB and S3, and upload CSV files, using the following section.
 
 ## How to create and upload CSV metering records - Seller Operations
 To publish metering records to AWS Marketplace for customer usage from your SaaS application, you will use the steps below to create and upload a CSV file for each customer. This process is manual and is recommended only for low Marketplace transaction volume.
@@ -93,19 +93,19 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 2. After logging into AWS, login to [MMP](https://aws.amazon.com/marketplace/management/homepage).
 3. Navigate to your product listing under Products > SaaS.
 4. Open the details of your Subscription or Pay-as-you-go product listing and navigate to **Pricing configuration**.
-5. Under the **Usage fees**, note the **API identifier** of the usage dimensions configured for the product. These will be the available dimensions you use for publishing SaaS usage data to AWS Marketplace as metered records.
+5. Under the **Usage fees**, note the **API identifier** of the usage dimensions configured for the product. These will be the available dimensions you use for publishing SaaS usage data to AWS Marketplace as metered records. In this example, we will use **dimension_1_id** and **dimension_2_id** usage dimensions.
 
 ![sc-01.png](sc-01.png)
 
-6. Next, navigate to **DynamoDB** in the AWS Management Console. Open the Subscribers table (default is **AWSMarketplaceSubscribers**). Click **Explore table items** to view all items in the table, which reflect subscribers of your product. Find the **customerIdentifier** that corresponds to a customer that you need to published metered records for. You will use this to name your CSV.
+6. Next, navigate to **DynamoDB** in the AWS Management Console. Open the Subscribers table (default is **AWSMarketplaceSubscribers**). Click **Explore table items** to view all items in the table, which reflect subscribers of your product. Find the **customerIdentifier** that corresponds to a customer that you need to published metered records for. You will use this to name your CSV. In this example, we will use **UdQA3UjLbUx** as the customerIdentifier.
 
 ![sc-02.png](sc-02.png)
 
-7. Using **customerIdentifier.csv** as a template, create a new CSV file using a text editor or Microsoft Excel. Save the file locally, make a copy, and title it the customerIdentifier you obtained from the Subscribers DynamoDB table.
+7. Using **customerIdentifier.csv** as a template, create a new CSV file using a text editor or Microsoft Excel. Save the file locally, make a copy, and title it the customerIdentifier you obtained from the Subscribers DynamoDB table. (**UdQA3UjLbUx.csv**, in this example)
 
 ![sc-03.png](sc-03.png)
 
-9. In the CSV file, fill-in the **usage_dimension** you obtained from step 5 (above) and the corresponding **value**, for the specific customerIdentifier. You can add multiple dimensions to one CSV, but you can only use one CSV per customerIdentifier.
+9. In the CSV file, fill-in the **usage_dimension** you obtained from step 5 (above) and the corresponding **value**, for the specific customerIdentifier. You can add multiple dimensions to one CSV, but you can only use one CSV per customerIdentifier. (**dimension_1_id** and **dimension_2_id** are the usage dimensions, in this example).
 
 ![sc-04.png](sc-04.png)
 
@@ -113,7 +113,7 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-06.png](sc-06.png)
 
-12. Next, navigate back to the **DynamoDB** console and open the Metering Records table (default is **AWSMarketplaceMeteringRecord**). Click **Explore table items** and you will see an item for the **customerIdentifier** you just uploaded. Click open the item and view the details to validate it looks correct. `metering_pending` will be set to `true`, meaning it hasn't yet been reported to AWS Marketplace.
+12. Next, navigate back to the **DynamoDB** console and open the Metering Records table (default is **AWSMarketplaceMeteringRecord**). Click **Explore table items** and you will see an item for the **customerIdentifier** (UdQA3UjLbU) you just uploaded as a CSV. Click open the item and view the details to validate it looks correct. `metering_pending` will be set to `true`, meaning it hasn't yet been reported to AWS Marketplace.
 
 ![sc-07.png](sc-07.png)
 
@@ -121,4 +121,4 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-08.png](sc-08.png)
 
-15. Within a day, the CSV file will be automatically deleted from S3 now that records have been reported to AWS Marketplace.
+15. Within a day, the CSV file will be automatically deleted from S3.
