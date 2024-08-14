@@ -2,7 +2,7 @@
 This optional add-on works with the [AWS Marketplace Serverless SaaS Integration](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration) to give sellers a manual, simple, CSV-based method for publishing custom metering usage to AWS Marketplace. **Do not** use this unless:
 1. You have a Limited or Public listing for a SaaS product on AWS Marketplace.
 2. Your listing uses "subscription" (usage-based) or "pay-as-you-go" (contract with consumption) [pricing models](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-pricing-models.html). This does not work with contract-based pricing or other [product delivery methods](https://docs.aws.amazon.com/marketplace/latest/userguide/product-preparation.html).
-3. You have deployed the Serverless SaaS Integration.
+3. You have deployed the [Serverless SaaS Integration](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration).
 
 ## Intended for
 This solution is optional, intended for:
@@ -101,7 +101,7 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-02.png](sc-02.png)
 
-7. Using **customerIdentifier.csv** as a template, create a new CSV file using a text editor or Microsoft Excel. Save the file locally with the < customerIdentifier>.csv as the file name.
+7. Using **customerIdentifier.csv** as a template, create a new CSV file using a text editor or Microsoft Excel. Save the file locally, make a copy, and title it the customerIdentifier you obtained from the Subscribers DynamoDB table.
 
 ![sc-03.png](sc-03.png)
 
@@ -109,7 +109,7 @@ To publish metering records to AWS Marketplace for customer usage from your SaaS
 
 ![sc-04.png](sc-04.png)
 
-10. Next, navigate to the S3 bucket in AWS Management Console, named **marketplace-csv-metering-s3bucket-<UID>**. Upload the CSV to the bucket by clicking **Upload** and selecting the file. This will now automatically read the CSV file and write it to the DynamoDB table before publishing to AWS Marketplace.
+10. Next, navigate to the S3 bucket in AWS Management Console, named **marketplace-csv-metering-s3bucket-UID**. Upload the CSV to the bucket by clicking **Upload** and selecting the file. This will now automatically read the CSV file and write it to the DynamoDB table before publishing to AWS Marketplace.
 
 ![sc-06.png](sc-06.png)
 
