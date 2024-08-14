@@ -30,9 +30,10 @@ To deploy the AWS Marketplace CSV-based Metering Solution, you'll want to access
 4. Under **Properties**, navigate to **Event notifications** and click **Create event notification**.
 5. Create an event notification with the following:
     1. Event name: **S3EventNotication**.
-    2. Event types: **Put** / s3:ObjectCreated:Put (only).
-    3. At the bottom, choose the Lambda function created by the Stack: **marketplace-csv-metering-UID**.
-    4. Click **Save changes**.
+    2. Suffix: **.csv**
+    3. Event types: **Put** / s3:ObjectCreated:Put (only).
+    4. At the bottom, choose the Lambda function created by the Stack: **marketplace-csv-metering-UID**.
+    5. Click **Save changes**.
 7. Using IAM, modify the Role used by your Sales Operations user, attaching the following additional permissions. This will depend upon how you've setup access to your AWS account or granted existing policies to your Sales Operations user. These are the minimum permissions needed to read the DynamoDB tables and upload to the S3 bucket. Replace the values in `<brackets>` with actual values:
 
 ```
